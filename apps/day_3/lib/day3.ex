@@ -1,4 +1,4 @@
-defmodule Day1.Application do
+defmodule Day3.Application do
   use Application
 
   def start(_type, _args) do
@@ -18,15 +18,15 @@ defmodule Day1.Application do
   end
 
   defp run_part(part, file_path) do
-    lists = Day1.Utils.process_file(file_path)
+    lines = Day3.Utils.process_file(file_path)
 
     case part do
       :part1 ->
-        result = Day1.Part1.solve(lists)
+        result = Day3.Part1.solve(lines)
         IO.inspect(result, label: "Part 1 Solution")
 
       :part2 ->
-        result = Day1.Part2.solve(lists)
+        result = Day3.Part2.solve(lines)
         IO.inspect(result, label: "Part 2 Solution")
     end
   end

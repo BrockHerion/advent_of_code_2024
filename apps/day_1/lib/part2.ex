@@ -1,7 +1,6 @@
 defmodule Day1.Part2 do
-  def solve(tuples) do
-    {list_a, list_b} = Day1.Utils.split_tuples(tuples)
-
+  def solve(lists) do
+    {list_a, list_b} = lists
     count_map = get_count_map({list_a, list_b})
 
     sum =

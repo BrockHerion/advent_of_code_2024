@@ -1,8 +1,7 @@
 defmodule Day1.Part1 do
-  def solve(tuples) do
+  def solve(lists) do
     sum =
-      tuples
-      |> Day1.Utils.split_tuples()
+      lists
       |> sort_lists()
       |> subtract_lists()
       |> Enum.sum()

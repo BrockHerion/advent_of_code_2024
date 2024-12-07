@@ -3,26 +3,19 @@ defmodule Day1.Utils do
     File.stream!(file_path)
     # Cleanup each line
     |> Stream.map(&String.trim/1)
-    # Validate each line
-    |> Stream.filter(&validate_line?/1)
-    # Parse each line to a tuple
-    |> Enum.map(&line_to_tuple/1)
+    # Parse each line and add to a list
+    |> Enum.reduce({[], []}, fn line, {list_a, list_b} ->
+      if validate_line?(line) do
+        [a, b] = String.split(line) |> Enum.map(&String.to_integer/1)
+        {[a | list_a], [b | list_b]}
+      else
+        {list_a, list_b}
+      end
+    end)
+    |> then(fn {list_a, list_b} -> {Enum.reverse(list_a), Enum.reverse(list_b)} end)
   end
 
   defp validate_line?(line) do
     Regex.match?(~r/^\d+\s+\d+$/, line)
-  end
-
-  defp line_to_tuple(line) do
-    [a, b] = String.split(line) |> Enum.map(&String.to_integer/1)
-    {a, b}
-  end
-
-  def split_tuples(tuples) do
-    Enum.reduce(tuples, {[], []}, fn {a, b}, {list_a, list_b} ->
-      # Add values to their respective lists
-      {[a | list_a], [b | list_b]}
-    end)
-    |> then(fn {list_a, list_b} -> {Enum.reverse(list_a), Enum.reverse(list_b)} end)
   end
 end
