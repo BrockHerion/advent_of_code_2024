@@ -23,7 +23,9 @@ defmodule Day2.Utils do
   end
 
   def valid_adjacent_pairs?(current, next, trend) do
-    abs(current - next) <= 3 and current != next and
+    diff = abs(current - next)
+
+    diff > 0 and diff < 4 and
       ((trend == :inc and current < next) or (trend == :dec and current > next))
   end
 
